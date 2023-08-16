@@ -2,21 +2,15 @@ import React, { Component } from "react";
 
 export default class Newsitem extends Component {
   render() {
+    const { title, description, img_url } = this.props;
     return (
       <div className="card" style={{ width: "18rem" }}>
-        <img
-          src=" https://static.politico.com/10/8a/ae099e8b48888f975703acaf31f2/election-2023-constitutional-access-ohio-78294.jpg"
-          className="card-img-top"
-          alt="..."
-        />
+        <img src={img_url} className="card-img-top" alt="..." />
         <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="/newsitem" className="btn btn-primary">
-            Go somewhere
+          <h5 className="card-title">{title}</h5>
+          <p className="card-text">{description}</p>
+          <a href="/newsitem" className="btn btn-sm btn-primary">
+            Read Further
           </a>
         </div>
       </div>
