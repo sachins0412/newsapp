@@ -47,7 +47,7 @@ export default class News extends Component {
   ];
   constructor() {
     super();
-    this.state = { article: this.articles, loading: false };
+    this.state = { articles: this.articles, loading: false };
   }
 
   render() {
@@ -55,35 +55,26 @@ export default class News extends Component {
       <div className="container my-3">
         <h2>Trending now</h2>
         <div className="row">
-          <div className="col-md-4 mb-3 mt-2">
-            <Newsitem
-              title="Some Title"
-              description="some description"
-              img_url="https://static.politico.com/10/8a/ae099e8b48888f975703acaf31f2/election-2023-constitutional-access-ohio-78294.jpg"
-            />
-          </div>
-
-          <div className="col-md-4 mb-3 mt-2">
-            <Newsitem
-              title="Some Title"
-              description="some description"
-              img_url="https://static.politico.com/10/8a/ae099e8b48888f975703acaf31f2/election-2023-constitutional-access-ohio-78294.jpg"
-            />
-          </div>
-          <div className="col-md-4 mb-3 mt-2">
-            <Newsitem
-              title="Some Title"
-              description="some description"
-              img_url="https://static.politico.com/10/8a/ae099e8b48888f975703acaf31f2/election-2023-constitutional-access-ohio-78294.jpg"
-            />
-          </div>
-          <div className="col-md-4 mb-3 mt-2">
-            <Newsitem
-              title="Some Title"
-              description="some description"
-              img_url="https://static.politico.com/10/8a/ae099e8b48888f975703acaf31f2/election-2023-constitutional-access-ohio-78294.jpg"
-            />
-          </div>
+          {this.state.articles.map((ele) => {
+            return (
+              <div key={ele.url} className="col-md-4 mb-3 mt-2">
+                <Newsitem
+                  title={
+                    ele.title.length > 35
+                      ? ele.title.slice(0, 35) + "..."
+                      : ele.title
+                  }
+                  description={
+                    ele.description.length > 100
+                      ? ele.description.slice(0, 100) + "..."
+                      : ele.description
+                  }
+                  img_url={ele.urlToImage}
+                  url={ele.url}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     );
