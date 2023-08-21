@@ -4,7 +4,6 @@ const API_KEY = require("./../apikey.json")["key"];
 export default class News extends Component {
   constructor() {
     super();
-    console.log("const");
     this.state = {
       articles: [],
       loading: false,
@@ -14,10 +13,9 @@ export default class News extends Component {
     };
   }
   async componentDidMount() {
-    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}&page=${this.state.page}`;
+    const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     const parsedData = await data.json();
-    console.log(parsedData);
     this.setState({
       articles: parsedData.articles,
       articles_length: parsedData.articles.length,
@@ -27,7 +25,7 @@ export default class News extends Component {
   handleNextPage = async () => {
     const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}&page=${
       this.state.page + 1
-    }`;
+    }&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     const parsedData = await data.json();
     const new_articles_length =
@@ -49,7 +47,7 @@ export default class News extends Component {
   handlePrevPage = async () => {
     const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}&page=${
       this.state.page - 1
-    }`;
+    }&pageSize=${this.props.pageSize}`;
     let data = await fetch(url);
     const parsedData = await data.json();
     const new_articles_length =
@@ -66,7 +64,6 @@ export default class News extends Component {
     }, 0);
   };
   render() {
-    console.log("render");
     return (
       <>
         <div className="container my-3">
